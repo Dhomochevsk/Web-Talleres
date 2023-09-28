@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Mi Plugin Personalizado
+Plugin Name: Mi Plugin Person
 Description: Un plugin personalizado para guardar datos en una tabla personalizada.
 Version: 1.0
 */
@@ -16,16 +16,17 @@ add_shortcode('mi_formulario', 'mostrar_formulario');
 // Definir la función para crear la tabla personalizada
 function crear_tabla_personalizada() {
     global $wpdb;
-    $tabla_nombre = $wpdb->prefix . 'talleres'; // Reemplaza 'mi_tabla' con el nombre de tu tabla
+    $tabla_nombre = $wpdb->prefix . 'talleres'; // Reemplaza 'talleres' con el nombre de tu tabla
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE $tabla_nombre (
         id INT NOT NULL AUTO_INCREMENT,
-        titulo VARCHAR(255) NOT NULL,
+        ID_CLAVE VARCHAR(10) NOT NULL, 
+        titulo TEXT NOT NULL,
         descripcion TEXT NOT NULL,
         codigo TEXT NOT NULL,
-        url_imagen VARCHAR(255) NOT NULL,
-        PRIMARY KEY (id)
+        url_imagen TEXT NOT NULL,
+        PRIMARY KEY (id) 
     ) $charset_collate;";
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -34,4 +35,7 @@ function crear_tabla_personalizada() {
 
 // Registrar la función para ejecutar al activar el plugin
 register_activation_hook(__FILE__, 'crear_tabla_personalizada');
+
+
+
 ?>
